@@ -189,6 +189,11 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"css/navbar.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/json.js":[function(require,module,exports) {
 "use strict";
 
@@ -203,6 +208,8 @@ exports.default = _default;
 "use strict";
 
 require("../css/style.css");
+
+require("../css/navbar.css");
 
 var _json = _interopRequireDefault(require("./json"));
 
@@ -226,7 +233,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var posts = {
   postPerpage: 10,
-  currentPage: 1,
+  currentPage: 0,
   results: null
 };
 var prev = document.querySelector('.previous');
@@ -236,8 +243,8 @@ window.addEventListener('load', init);
 function init(e) {
   // Grid wrapper displaying message
   var div = document.createElement('div');
-  div.setAttribute('class', 'message wrapper');
-  div.innerText = 'Press start button';
+  div.setAttribute('class', 'message wrapper'); // div.innerText = 'Press start button';
+
   wrapper.appendChild(div); // Start button
 
   var button = document.createElement('button');
@@ -268,48 +275,99 @@ function loadJSON() {
     });
   });
   posts.results = result;
-  console.log(posts.results);
   loadPage(0);
 }
 
 function loadPage(page) {
+  document.querySelector('.game').innerHTML = '';
   posts.currentPage = page;
+  document.querySelector('.numday').innerHTML = posts.currentPage;
   document.querySelector('.index').classList.remove('hidden');
   document.querySelector('.start').style.display = 'none';
-  message('Check the Word Meaning.');
+  loadNav();
+  loadNumbers();
   var myWords = shuffle(posts.results[page]);
   var game = document.querySelector('.game');
   myWords.forEach(function (word) {
     var box = document.createElement('div');
     box.classList.add('box');
+    box.classList.add('tooltip-message');
+    box.setAttribute('data-tooltip-message', word.en);
     box.innerText = word.en;
     box.addEventListener('mouseenter', function (e) {
       box.style.backgroundColor = "#4CAF50";
       box.innerText = word.ko;
+      loadTooltips(e);
     });
     box.addEventListener('mouseleave', function (e) {
       box.style.backgroundColor = '#3b5998';
       box.innerText = word.en;
+      var tooltipOutput = document.querySelector('.tooltip-output');
+      tooltipOutput.style.display = 'none';
     });
     game.appendChild(box);
   });
+
+  function add(a) {
+    return a + 10;
+  }
+
+  function loadTooltips(event) {
+    var tooltips = document.querySelectorAll('.tooltip-message');
+    var tooltipOutput = document.querySelector('.tooltip-output');
+    var myInterval; // clearInterval(myInterval);
+
+    tooltipOutput.style.display = 'block';
+    tooltipOutput.style.top = event.clientY + 5 + "px";
+    tooltipOutput.style.left = event.clientX + 5 + "px";
+    tooltipOutput.innerHTML = event.target.getAttribute("data-tooltip-message");
+  }
 }
 
-    prev.addEventListener('click', function (e) {
+function loadNumbers() {
+  var numbers = document.querySelector('.numbers');
+  numbers.innerHTML = '';
+  posts.results.forEach(function (item, i) {
+    var span = document.createElement('span');
+    span.classList.add('number');
+    span.textContent = i + 1;
+    span.addEventListener('click', function (e) {
+      numbers.innerHTML = '';
       document.querySelector('.game').innerHTML = '';
-      posts.currentPage -= 1;
-      console.log('prev', posts.currentPage);
-      loadPage(posts.currentPage);
+      loadPage(this.textContent);
     });
-    next.addEventListener('click', function (e) {
-      document.querySelector('.game').innerHTML = '';
-      posts.currentPage += 1;
-      loadPage(posts.currentPage);
-    });
-
-function message(output) {
-  document.querySelector('.message').innerHTML = `<h1>DAY-${posts.currentPage+1} in ${posts.results.length}</h1><p>${output}</p>`;
+    numbers.appendChild(span);
+  });
 }
+
+function loadNav() {
+  document.querySelector('.navbar').classList.remove('hidden');
+  document.querySelector('.day').textContent = "DAY-".concat(parseInt(posts.currentPage), " in ").concat(posts.results.length);
+  document.querySelector('.openbtn').addEventListener('click', function (e) {
+    document.getElementById('mySidenav').style.width = '270px';
+  });
+  document.querySelector('.closebtn').addEventListener('click', function (e) {
+    document.getElementById('mySidenav').style.width = '0';
+  });
+  document.querySelector('.shuffleWords').addEventListener('click', function (e) {
+    document.querySelector('.game').innerHTML = '';
+    loadPage(posts.currentPage);
+    document.getElementById('mySidenav').style.width = '0';
+  });
+}
+
+prev.addEventListener('click', function (e) {
+  document.querySelector('.game').innerHTML = '';
+  posts.currentPage--;
+  loadPage(posts.currentPage);
+  console.log(posts.currentPage);
+});
+next.addEventListener('click', function (e) {
+  document.querySelector('.game').innerHTML = '';
+  posts.currentPage++;
+  loadPage(posts.currentPage);
+  console.log(posts.currentPage);
+});
 
 function shuffle(arr) {
   var n = arr.length;
@@ -355,7 +413,7 @@ function shuffle(arr) {
 //     { en: "leap", ko: "뛰다" },
 //     { en: "reap", ko: "수확하다" },
 // ]
-},{"../css/style.css":"css/style.css","./json":"js/json.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"../css/style.css":"css/style.css","../css/navbar.css":"css/navbar.css","./json":"js/json.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -383,7 +441,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52446" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50178" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -559,5 +617,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
 //# sourceMappingURL=/app.c3f9f951.js.map

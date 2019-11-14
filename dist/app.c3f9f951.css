@@ -55,15 +55,36 @@ body {
     background-color: #4CAF50; /* green */
 }
 
+/* mode */
+.mode {
+    position: fixed;
+    left: 50px;
+    right: 50px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.mode > a {
+    font-size: 1.5em;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(70, 112, 105, 0.6);
+    color: white;
+    border-radius: 5px;
+}
+
+
 /* index */
 .index {
     display: flex;
     position: absolute;
     justify-content: space-between;
-    top: 50%;
+    top: 70%;
     left: 50px;
     right: 50px;
-    z-index: 10;
+    z-index: 1000 !important;
 }
 
 @media (max-width: 796px) {
@@ -76,14 +97,16 @@ body {
     font-size: 1.5em;
     text-decoration: none;
     display: inline-block;
-    padding: 8px 16px;
-    background: rgba(70, 112, 105, 0.6);
+    padding: 4px 8px;
+    background: rgba(68,68,68,0.6);
     color: white;
+    border-radius: 5px;
 }
 
+
 .index > a:hover {
-    background-color: rgba(241, 241, 241, 1);
-    color: black;
+    background-color: #3b5998;
+    color: white;
 }
 
 .next {
@@ -118,7 +141,105 @@ body {
     background: #b36257;
 }
 
+/* tool tips */
+.tooltip-message {
+}
 
+.tooltip-output {
+    z-index: 100;
+    display: none;
+    position: absolute;
+    border: 1px solid #ddd;
+    background-color: #444;
+    color: white;
+    padding: 5px;
+    top: 100px;
+    left: 50px;
+}
+
+
+
+
+
+
+
+nav {
+    position: fixed;
+    z-index: 10000;
+}
+
+nav.hidden {
+    width: 200px;
+    display: none;
+}
+
+.sidenav {
+    height: 60%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(17,17,17, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 25px;
+    font-weight: bold;
+    color: #444;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+}
+.number {
+    text-align: center;
+    color: #ddd;
+    width: 20px;
+    height: 20px;
+    font-weight: lighter;
+    font-size: 1.2em;
+    font-weight: 100;
+    margin: 5px;
+    border: 1px solid #ddd;
+    padding: 2px;
+}
 
 
 

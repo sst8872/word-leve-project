@@ -55,15 +55,36 @@ body {
     background-color: #4CAF50; /* green */
 }
 
+/* mode */
+.mode {
+    position: fixed;
+    left: 50px;
+    right: 50px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.mode > a {
+    font-size: 1.5em;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(70, 112, 105, 0.6);
+    color: white;
+    border-radius: 5px;
+}
+
+
 /* index */
 .index {
     display: flex;
     position: absolute;
     justify-content: space-between;
-    top: 50%;
+    top: 70%;
     left: 50px;
     right: 50px;
-    z-index: 10;
+    z-index: 1000 !important;
 }
 
 @media (max-width: 796px) {
@@ -76,14 +97,16 @@ body {
     font-size: 1.5em;
     text-decoration: none;
     display: inline-block;
-    padding: 8px 16px;
-    background: rgba(70, 112, 105, 0.6);
+    padding: 4px 8px;
+    background: rgba(68,68,68,0.6);
     color: white;
+    border-radius: 5px;
 }
 
+
 .index > a:hover {
-    background-color: rgba(241, 241, 241, 1);
-    color: black;
+    background-color: #3b5998;
+    color: white;
 }
 
 .next {
@@ -117,6 +140,25 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #b36257;
 }
+
+/* tool tips */
+.tooltip-message {
+}
+
+.tooltip-output {
+    z-index: 100;
+    display: none;
+    position: absolute;
+    border: 1px solid #ddd;
+    background-color: #444;
+    color: white;
+    padding: 5px;
+    top: 100px;
+    left: 50px;
+}
+
+
+
 
 
 

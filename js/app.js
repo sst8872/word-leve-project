@@ -1,9 +1,10 @@
 import '../css/style.css';
+import '../css/navbar.css';
 import jsonData from './json';
 
 const posts = {
     postPerpage: 10,
-    currentPage: 1,
+    currentPage: 0,
     results: null
 };
 const prev = document.querySelector('.previous');
@@ -16,7 +17,7 @@ function init(e) {
     // Grid wrapper displaying message
     let div = document.createElement('div');
     div.setAttribute('class', 'message wrapper');
-    div.innerText = 'Press start button';
+    // div.innerText = 'Press start button';
     wrapper.appendChild(div);
 
     // Start button
@@ -41,49 +42,101 @@ function loadJSON() {
         });
     });
     posts.results = result;
-    console.log(posts.results);
     loadPage(0);
 }
 
 function loadPage(page) {
+    document.querySelector('.game').innerHTML = '';
     posts.currentPage = page;
+    document.querySelector('.numday').innerHTML = posts.currentPage;
     document.querySelector('.index').classList.remove('hidden');
     document.querySelector('.start').style.display = 'none';
-    message("Check the Word Meaning");
+    loadNav();
+    loadNumbers();
     let myWords = shuffle(posts.results[page]);
     const game = document.querySelector('.game');
     myWords.forEach(word => {
         let box = document.createElement('div');
         box.classList.add('box');
+        box.classList.add('tooltip-message');
+        box.setAttribute('data-tooltip-message', word.en);
         box.innerText = word.en;
         box.addEventListener('mouseenter', function (e) {
             box.style.backgroundColor = "#4CAF50";
             box.innerText = word.ko;
+            loadTooltips(e);
         });
         box.addEventListener('mouseleave', function (e) {
             box.style.backgroundColor = '#3b5998';
             box.innerText = word.en;
-        })
+
+            const tooltipOutput = document.querySelector('.tooltip-output');
+            tooltipOutput.style.display = 'none';
+        });
         game.appendChild(box);
     });
+    function add(a) {
+        return a + 10;
+    }
 
-    prev.addEventListener('click', function (e) {
-        document.querySelector('.game').innerHTML = '';
-        posts.currentPage -= 1;
-        console.log('prev', posts.currentPage);
-        // loadPage(posts.currentPage);
+
+    function loadTooltips(event) {
+        const tooltips = document.querySelectorAll('.tooltip-message');
+        const tooltipOutput = document.querySelector('.tooltip-output');
+        let myInterval;
+        // clearInterval(myInterval);
+        tooltipOutput.style.display = 'block';
+        tooltipOutput.style.top = event.clientY + 5 + "px";
+        tooltipOutput.style.left = event.clientX + 5 + "px";
+        tooltipOutput.innerHTML = event.target.getAttribute("data-tooltip-message");
+    }
+}
+
+function loadNumbers() {
+    const numbers = document.querySelector('.numbers');
+    numbers.innerHTML = '';
+    posts.results.forEach((item, i) => {
+        const span = document.createElement('span');
+        span.classList.add('number');
+        span.textContent = i + 1;
+        span.addEventListener('click', function (e) {
+            numbers.innerHTML = '';
+            document.querySelector('.game').innerHTML = '';
+            loadPage(this.textContent);
+        });
+        numbers.appendChild(span);
     });
+}
 
-    next.addEventListener('click', function (e) {
+function loadNav() {
+    document.querySelector('.navbar').classList.remove('hidden');
+     document.querySelector('.day').textContent = `DAY-${parseInt(posts.currentPage)} in ${posts.results.length}`;
+     document.querySelector('.openbtn').addEventListener('click', function (e) {
+            document.getElementById('mySidenav').style.width = '270px';
+     });
+     document.querySelector('.closebtn').addEventListener('click', function (e) {
+            document.getElementById('mySidenav').style.width = '0';
+     })
+    document.querySelector('.shuffleWords').addEventListener('click', function (e) {
         document.querySelector('.game').innerHTML = '';
-        posts.currentPage += 1;
         loadPage(posts.currentPage);
+        document.getElementById('mySidenav').style.width = '0';
     });
 }
 
-function message(output) {
-    document.querySelector('.message').innerHTML = output;
-}
+prev.addEventListener('click', function (e) {
+    document.querySelector('.game').innerHTML = '';
+    posts.currentPage--;
+    loadPage(posts.currentPage);
+    console.log(posts.currentPage);
+});
+
+next.addEventListener('click', function (e) {
+    document.querySelector('.game').innerHTML = '';
+    posts.currentPage++;
+    loadPage(posts.currentPage);
+    console.log(posts.currentPage);
+});
 
 
 function shuffle (arr) {
@@ -97,6 +150,8 @@ function shuffle (arr) {
     }
     return arr;
 }
+
+
 
 // let myWords = [
 //     { en: "measure", ko: "법안" },
