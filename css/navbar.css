@@ -17,6 +17,7 @@ nav.hidden {
     left: 0;
     background-color: rgba(17,17,17, 0.9);
     overflow-x: hidden;
+    overflow-y: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
@@ -70,6 +71,7 @@ nav.hidden {
     margin: 5px;
     border: 1px solid #ddd;
     padding: 2px;
+    cursor: pointer;
 }
 
 span.openbtn {
