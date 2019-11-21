@@ -1,6 +1,7 @@
 import '../css/style.css';
 import '../css/navbar.css';
 import jsonData from './json';
+import scrollAlarm from "./scrollAlarm";
 
 const posts = {
     postPerpage: 10,
@@ -13,6 +14,8 @@ const next = document.querySelector('.next');
 
 
 window.addEventListener('load', init);
+wrapper.addEventListener('scroll', scrollAlarm);
+
 
 function init(e) {
     // Grid wrapper displaying message

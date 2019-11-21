@@ -5,13 +5,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hidden Words</title>
+    <title>Words-Level-Study</title>
 </head>
 <body>
     <nav class="navbar hidden">
         <div class="indicator">
             <span class="openbtn">&#9776;</span><br>
             <span class="numday">1</span>
+        </div>
+        <div class="scroll">
+            <span class="scroll-top">top</span>
+            <span class="scroll-bottom">end</span>
         </div>
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn">&times;</a>
@@ -28,6 +32,7 @@
         </div>
     <div class="tooltip-output"></div>
     </div>
+    <script>history.scrollRestoration = "manual"</script>
     <script src="js/app.js"></script>
 </body>
 </html>
