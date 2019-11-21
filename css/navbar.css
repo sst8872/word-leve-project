@@ -1,6 +1,6 @@
-nav {
+nav .indicator {
     position: fixed;
-    z-index: 10000;
+    left: 20px;
 }
 
 nav.hidden {
@@ -42,11 +42,7 @@ nav.hidden {
     margin-left: 50px;
 }
 
-.openbtn {
-    font-size: 25px;
-    font-weight: bold;
-    color: #444;
-}
+
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
@@ -76,3 +72,19 @@ nav.hidden {
     padding: 2px;
 }
 
+span.openbtn {
+    display: inline-block;
+    font-size: 40px;
+    font-weight: bold;
+    color: #444;
+}
+span.numday {
+    display: inline-block;
+    padding: 2px 4px 2px 4px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #444;
+    background-color: #dddddd;
+    margin-left: 4px;
+}

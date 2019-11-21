@@ -7,6 +7,7 @@ const posts = {
     currentPage: 0,
     results: null
 };
+let firstLoad = true;
 const prev = document.querySelector('.previous');
 const next = document.querySelector('.next');
 
@@ -31,7 +32,7 @@ function init(e) {
     // Game element
     let game = document.createElement('div');
     game.classList.add('game');
-    wrapper.appendChild(game);
+    wrapper.insertBefore(game, document.querySelector('.index'));
 }
 
 function loadJSON() {
@@ -48,7 +49,12 @@ function loadJSON() {
 function loadPage(page) {
     document.querySelector('.game').innerHTML = '';
     posts.currentPage = page;
-    document.querySelector('.numday').innerHTML = posts.currentPage;
+    if (firstLoad) {
+        document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
+        firstLoad = false;
+    } else {
+        document.querySelector('.numday').innerHTML = parseInt(posts.currentPage);
+    }
     document.querySelector('.index').classList.remove('hidden');
     document.querySelector('.start').style.display = 'none';
     loadNav();
@@ -114,9 +120,16 @@ function loadNav() {
      document.querySelector('.openbtn').addEventListener('click', function (e) {
             document.getElementById('mySidenav').style.width = '270px';
      });
-     document.querySelector('.closebtn').addEventListener('click', function (e) {
+
+
+    document.querySelector('.closebtn').addEventListener('click', function (e) {
             document.getElementById('mySidenav').style.width = '0';
-     })
+     }, false);
+
+     // document.body.addEventListener('mouseleave', function (e) {
+     //     document.getElementById('mySidenav').style.width = '0';
+     // })
+
     document.querySelector('.shuffleWords').addEventListener('click', function (e) {
         document.querySelector('.game').innerHTML = '';
         loadPage(posts.currentPage);
