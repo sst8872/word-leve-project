@@ -22,7 +22,7 @@ nav .indicator {
     text-align: center;
     border-radius: 5px;
     background-color: #3b5998;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 @media screen and (min-width: 880px) {
