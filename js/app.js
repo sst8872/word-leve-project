@@ -126,9 +126,9 @@ function loadNav() {
             document.getElementById('mySidenav').style.width = '0';
      }, false);
 
-     // document.body.addEventListener('mouseleave', function (e) {
-     //     document.getElementById('mySidenav').style.width = '0';
-     // })
+     document.body.addEventListener('mouseleave', function (e) {
+         document.getElementById('mySidenav').style.width = '0';
+     })
 
     document.querySelector('.shuffleWords').addEventListener('click', function (e) {
         document.querySelector('.game').innerHTML = '';
