@@ -176,3 +176,97 @@ body {
 
 
 
+
+nav .indicator {
+    position: fixed;
+    left: 20px;
+}
+
+nav.hidden {
+    width: 200px;
+    display: none;
+}
+
+.sidenav {
+    height: 60%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(17,17,17, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+}
+.number {
+    text-align: center;
+    color: #ddd;
+    width: 20px;
+    height: 20px;
+    font-weight: lighter;
+    font-size: 1.2em;
+    font-weight: 100;
+    margin: 5px;
+    border: 1px solid #ddd;
+    padding: 2px;
+}
+
+span.openbtn {
+    display: inline-block;
+    font-size: 40px;
+    font-weight: bold;
+    color: #444;
+}
+span.numday {
+    display: inline-block;
+    padding: 2px 4px 2px 4px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #444;
+    background-color: #dddddd;
+    margin-left: 4px;
+}
+
+
+/*# sourceMappingURL=/app.c3f9f951.css.map */
