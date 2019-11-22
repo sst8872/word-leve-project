@@ -1,7 +1,11 @@
+import '../css/loader.css';
 import '../css/style.css';
 import '../css/navbar.css';
-import jsonData from './json';
+// import jsonData from './json';
+import getSheetsLength from "./fetchSheetsLength";
 import scrollAlarm from "./scrollAlarm";
+
+let myData = [];
 
 const posts = {
     postPerpage: 10,
@@ -29,8 +33,9 @@ function init(e) {
     button.type = button;
     button.setAttribute('class', 'start');
     button.textContent = "Start Study";
-    button.addEventListener('click', loadJSON);
+    button.addEventListener('click', () => getSheetsLength(loadJSON));
     wrapper.appendChild(button);
+
 
     // Game element
     let game = document.createElement('div');
@@ -38,15 +43,40 @@ function init(e) {
     wrapper.insertBefore(game, document.querySelector('.index'));
 }
 
-function loadJSON() {
-    let temp =[...[...jsonData]];
-    let result = temp.map(arr => {
-        return arr.map(([a,b]) => {
-            return { en: a, ko: b };
+function loadJSON(sheetLength) {
+    let urls = [];
+    var sheetID = '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84';
+
+    for (let sheetNum = 1; sheetNum <= sheetLength; sheetNum++) {
+        let jsonURL = `https://spreadsheets.google.com/feeds/list/${sheetID}/${sheetNum}/public/values?alt=json`;
+        urls = [...urls, jsonURL];
+    }
+
+    Promise.all(urls.map(url => {
+        return fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                let tempArr = [];
+                let sheetName = data.feed.title.$t;
+                data.feed.entry.forEach(item => {
+                    let holder = {};
+                    for (let key in item) {
+                        if (key.substring(4) === 'english') {
+                            holder.en = item[key].$t;
+                        } else if (key.substring(4) === 'korean') {
+                            holder.ko = item[key].$t;
+                        }
+                    }
+                    tempArr = [...tempArr, holder];
+                });
+                return tempArr;
+            })
+    }))
+        .then(result => {
+            posts.results = result;
+            loadPage(0);
+            document.querySelector('.loader').style.display = 'none';
         });
-    });
-    posts.results = result;
-    loadPage(0);
 }
 
 function loadPage(page) {

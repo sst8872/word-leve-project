@@ -27,7 +27,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/css" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -36,6 +36,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\projects\amost-finished-NEVER-DELEVE\words-level-project\css" />
       <recent name="C:\Users\user\Desktop\projects\words-level-exercise\js" />
     </key>
   </component>
@@ -51,12 +52,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.fetchSheetsLength.js">
     <configuration name="app.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/app.js" working-dir="$PROJECT_DIR$/js">
+      <method v="2" />
+    </configuration>
+    <configuration name="fetchSheetsLength.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/js/fetchSheetsLength.js" working-dir="$PROJECT_DIR$/js">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.fetchSheetsLength.js" />
         <item itemvalue="Node.js.app.js" />
       </list>
     </recent_temporary>
@@ -86,7 +91,7 @@
       <workItem from="1574342318059" duration="8104000" />
       <workItem from="1574375248059" duration="1293000" />
       <workItem from="1574380203837" duration="1206000" />
-      <workItem from="1574383355519" duration="600000" />
+      <workItem from="1574383355519" duration="8578000" />
     </task>
     <servers />
   </component>
