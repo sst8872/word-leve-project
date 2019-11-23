@@ -42,7 +42,9 @@ body {
 
 @media screen and (max-width: 330px) {
     .game {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        font-size: 0.9em;
+        text-align: center;
     }
 }
 
