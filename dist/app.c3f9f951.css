@@ -68,7 +68,7 @@ body {
     .game {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         font-size: 0.9em;
-        text-align: ;
+        text-align: center;
     }
 }
 
@@ -242,6 +242,7 @@ body {
 
 
 
+
 nav .indicator {
     position: fixed;
     left: 30px;
@@ -397,7 +398,6 @@ nav.hidden {
 
 span.openbtn {
     display: inline-block;
-    border: 1px solid black;
     font-size: 40px;
     font-weight: bold;
     color: #444;

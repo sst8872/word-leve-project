@@ -44,7 +44,7 @@ body {
     .game {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         font-size: 0.9em;
-        text-align: ;
+        text-align: center;
     }
 }
 
@@ -211,6 +211,7 @@ body {
     top: 100px;
     left: 50px;
 }
+
 
 
 

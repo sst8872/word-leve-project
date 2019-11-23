@@ -331,7 +331,6 @@ function loadJSON(sheetLength) {
     posts.results = result;
     loadPage(0);
     document.querySelector('.loader').style.display = 'none';
-    document.querySelector('.home').style.display = 'block';
   });
 }
 
@@ -524,7 +523,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58918" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64702" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -77,7 +77,6 @@ function loadJSON(sheetLength) {
             posts.results = result;
             loadPage(0);
             document.querySelector('.loader').style.display = 'none';
-            document.querySelector('.home').style.display = 'block';
         });
 }
 
