@@ -80,6 +80,7 @@ function loadJSON(sheetLength) {
 }
 
 function loadPage(page) {
+    console.log(posts.results);
     document.querySelector('.game').innerHTML = '';
     posts.currentPage = page;
     if (firstLoad) {
