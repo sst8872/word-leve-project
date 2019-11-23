@@ -11,6 +11,25 @@ body {
     overscroll-behavior: contain;
 }
 
+/* Style buttons */
+.btn {
+    position: absolute;
+    top: 250px;
+    left: -5px;
+    background-color: #ddd; /* Blue background */
+    border: none; /* Remove borders */
+    color: royalblue; /* White text */
+    padding: 10px 12px; /* Some padding */
+    font-size: 20px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: #3b5998;
+    color: white;
+}
+
 #wrapper {
     max-width: 768px;
     height: 500px;

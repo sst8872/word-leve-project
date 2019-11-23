@@ -79,7 +79,7 @@ nav.hidden {
     }
     .scroll > .scroll-bottom {
         right: 20px;
-        bottom: 200px;
+        bottom: 350px;
     }
 }
 
@@ -157,6 +157,12 @@ span.openbtn {
     font-weight: bold;
     color: #444;
 }
+
+span.openbtn:hover {
+    cursor: pointer;
+    color: #3b5998;
+}
+
 span.numday {
     display: inline-block;
     padding: 2px 4px 2px 4px;
