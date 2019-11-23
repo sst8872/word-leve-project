@@ -64,6 +64,12 @@ nav.hidden {
     padding-top: 60px;
 }
 
+@media screen and (min-width: 1300px) {
+    .sidenav {
+        left: calc(30% - 200px);
+    }
+}
+
 @media screen and (max-width: 380px) {
     .sidenav {
         height: 80%;
@@ -147,6 +153,7 @@ nav.hidden {
 
 span.openbtn {
     display: inline-block;
+    border: 1px solid black;
     font-size: 40px;
     font-weight: bold;
     color: #444;

@@ -77,6 +77,7 @@ function loadJSON(sheetLength) {
             posts.results = result;
             loadPage(0);
             document.querySelector('.loader').style.display = 'none';
+            document.querySelector('.home').style.display = 'block';
         });
 }
 
@@ -181,7 +182,7 @@ function loadNav() {
 }
 
 prev.addEventListener('click', function (e) {
-    if (posts.currentPage - 1 <= 0) {
+    if (posts.currentPage <= 0) {
         alert('Hey, No Negative Pages!');
         return;
     } else {
