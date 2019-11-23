@@ -12,7 +12,7 @@ const posts = {
     currentPage: 0,
     results: null
 };
-let firstLoad = true;
+// let firstLoad = true;
 const prev = document.querySelector('.previous');
 const next = document.querySelector('.next');
 
@@ -80,15 +80,15 @@ function loadJSON(sheetLength) {
 }
 
 function loadPage(page) {
-    console.log(posts.results);
     document.querySelector('.game').innerHTML = '';
     posts.currentPage = page;
-    if (firstLoad) {
-        document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
-        firstLoad = false;
-    } else {
-        document.querySelector('.numday').innerHTML = parseInt(posts.currentPage);
-    }
+    document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
+    // if (firstLoad) {
+    //     document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
+    //     firstLoad = false;
+    // } else {
+    //     document.querySelector('.numday').innerHTML = parseInt(posts.currentPage);
+    // }
     document.querySelector('.index').classList.remove('hidden');
     document.querySelector('.start').style.display = 'none';
     loadNav();
@@ -142,7 +142,7 @@ function loadNumbers() {
         span.addEventListener('click', function (e) {
             numbers.innerHTML = '';
             document.querySelector('.game').innerHTML = '';
-            loadPage(this.textContent);
+            loadPage(parseInt(this.textContent) - 1);
         });
         numbers.appendChild(span);
     });
@@ -150,7 +150,7 @@ function loadNumbers() {
 
 function loadNav() {
     document.querySelector('.navbar').classList.remove('hidden');
-     document.querySelector('.day').textContent = `DAY-${parseInt(posts.currentPage)} in ${posts.results.length}`;
+     document.querySelector('.day').textContent = `DAY-${parseInt(posts.currentPage) + 1} in ${posts.results.length}`;
      document.querySelector('.openbtn').addEventListener('click', function (e) {
             document.getElementById('mySidenav').style.width = '270px';
      });
@@ -172,17 +172,26 @@ function loadNav() {
 }
 
 prev.addEventListener('click', function (e) {
-    document.querySelector('.game').innerHTML = '';
-    posts.currentPage--;
-    loadPage(posts.currentPage);
-    console.log(posts.currentPage);
+    if (posts.currentPage - 1 <= 0) {
+        alert('Hey, No Negative Pages!');
+        return;
+    } else {
+        document.querySelector('.game').innerHTML = '';
+        posts.currentPage--;
+        loadPage(posts.currentPage);
+    }
 });
 
 next.addEventListener('click', function (e) {
-    document.querySelector('.game').innerHTML = '';
-    posts.currentPage++;
-    loadPage(posts.currentPage);
-    console.log(posts.currentPage);
+    if (posts.currentPage + 1 >= posts.results.length) {
+        alert('No More Pages!');
+        return;
+    } else {
+        document.querySelector('.game').innerHTML = '';
+        posts.currentPage++;
+        loadPage(posts.currentPage);
+        console.log(posts.currentPage);
+    }
 });
 
 
