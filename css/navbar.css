@@ -52,7 +52,7 @@ nav.hidden {
 }
 
 .sidenav {
-    height: 60%;
+    height: 70%;
     width: 0;
     position: fixed;
     z-index: 1;
@@ -106,8 +106,9 @@ nav.hidden {
 .number {
     text-align: center;
     color: #ddd;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
     font-weight: lighter;
     font-size: 1.2em;
     font-weight: 100;
@@ -115,6 +116,9 @@ nav.hidden {
     border: 1px solid #ddd;
     padding: 2px;
     cursor: pointer;
+}
+.number:hover {
+    background-color: #3498db;
 }
 
 span.openbtn {
@@ -133,3 +137,10 @@ span.numday {
     background-color: #dddddd;
     margin-left: 4px;
 }
+span.day {
+}
+
+.active {
+    background-color: #3498db;
+}
+

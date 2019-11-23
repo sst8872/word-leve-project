@@ -10,7 +10,8 @@ let myData = [];
 const posts = {
     postPerpage: 10,
     currentPage: 0,
-    results: null
+    results: null,
+    currentDay: 0
 };
 // let firstLoad = true;
 const prev = document.querySelector('.previous');
@@ -143,16 +144,26 @@ function loadNumbers() {
             numbers.innerHTML = '';
             document.querySelector('.game').innerHTML = '';
             loadPage(parseInt(this.textContent) - 1);
+            posts.currentDay = this.textContent;
         });
+        console.log(i + 1, 'i index');
+        console.log(posts.currentDay, 'current day');
+
+        if (i + 1 == posts.currentPage + 1) {
+            span.classList.add('active');
+        }
         numbers.appendChild(span);
+        // if ((parseInt(this.textContent) - 1) == posts.currentPage) {
+        //     this.classList.add('isActive');
+        // }
     });
 }
 
 function loadNav() {
     document.querySelector('.navbar').classList.remove('hidden');
-     document.querySelector('.day').textContent = `DAY-${parseInt(posts.currentPage) + 1} in ${posts.results.length}`;
+     document.querySelector('.day').innerHTML = `<span class="day">DAY-${parseInt(posts.currentPage) + 1}</spanclass> in ${posts.results.length}`;
      document.querySelector('.openbtn').addEventListener('click', function (e) {
-            document.getElementById('mySidenav').style.width = '270px';
+            document.getElementById('mySidenav').style.width = '300px';
      });
 
 
