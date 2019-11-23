@@ -146,8 +146,6 @@ function loadNumbers() {
             loadPage(parseInt(this.textContent) - 1);
             posts.currentDay = this.textContent;
         });
-        console.log(i + 1, 'i index');
-        console.log(posts.currentDay, 'current day');
 
         if (i + 1 == posts.currentPage + 1) {
             span.classList.add('active');

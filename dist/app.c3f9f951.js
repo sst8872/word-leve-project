@@ -399,8 +399,6 @@ function loadNumbers() {
       loadPage(parseInt(this.textContent) - 1);
       posts.currentDay = this.textContent;
     });
-    console.log(i + 1, 'i index');
-    console.log(posts.currentDay, 'current day');
 
     if (i + 1 == posts.currentPage + 1) {
       span.classList.add('active');
@@ -525,7 +523,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54290" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54795" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

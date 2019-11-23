@@ -19,6 +19,13 @@ body {
     overflow-y: auto;
 }
 
+@media screen and (max-width: 330px) {
+    #wrapper {
+        height: 400px;
+    }
+}
+
+
 
 /* game grid */
 .game {
@@ -33,7 +40,10 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
-@media screen and (max-width: 476px) {
+@media screen and (max-width: 330px) {
+    .game {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
 }
 
 .box {
@@ -149,6 +159,18 @@ body {
 }
 
 @media screen and (min-width: 645px) {
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+}
+
+@media screen and (max-width: 330px) {
     ::-webkit-scrollbar {
         width: 10px;
     }
