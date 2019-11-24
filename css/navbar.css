@@ -148,6 +148,7 @@ nav.hidden {
     cursor: pointer;
 }
 .number:hover {
+    color: red;
     background-color: #3498db;
 }
 
@@ -178,5 +179,6 @@ span.day {
 
 .active {
     background-color: #3498db;
+    color: red;
 }
 
