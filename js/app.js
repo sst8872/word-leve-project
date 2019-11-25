@@ -18,7 +18,7 @@ const posts = {
 // let firstLoad = true;
 const prev = document.querySelector('.previous');
 const next = document.querySelector('.next');
-const printBtn = document.querySelector('.printBtn');
+const printBtn = document.querySelector('.printer');
 const exportContent = document.getElementById('exportContent');
 
 
@@ -84,10 +84,8 @@ function loadJSON(sheetLength) {
         });
 }
 
-function loadPage(page, asycData) {
-    printBtn.addEventListener('click', function (e) {
-        makeTwoCopies(e, asycData);
-    });
+
+function loadPage(page) {
     document.querySelector('.game').innerHTML = '';
     posts.currentPage = page;
     document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
@@ -210,6 +208,9 @@ next.addEventListener('click', function (e) {
     }
 });
 
+printBtn.addEventListener('click', function (e) {
+    makeTwoCopies(e);
+});
 
 function shuffle (arr) {
     var n = arr.length;
@@ -223,15 +224,16 @@ function shuffle (arr) {
     return arr;
 }
 
-function makeTwoCopies(event, wordData) {
-    makeWordContent(event, wordData, "white");
-    makeWordContent(event, wordData, "black");
+function makeTwoCopies(event) {
+    makeWordContent(event, "white");
+    makeWordContent(event, "black");
 }
 
 
-function makeWordContent(event, wordData, color) {
-    let index  = parseInt(event.target.textContent) - 1;
-    let dayWords = wordData[index];
+function makeWordContent(event, color) {
+    const numDay = document.querySelector('.numday').textContent;
+    let index  = parseInt(numDay) - 1;
+    let dayWords = posts.results[index];
     exportContent.innerHTML = `<h3
                                     style="text-align: center"
                                 >

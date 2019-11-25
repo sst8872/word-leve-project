@@ -36,13 +36,13 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\user\Desktop\projects\amost-finished-NEVER-DELEVE\words-level-project\resource" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\projects\amost-finished-NEVER-DELEVE\words-level-project\css" />
       <recent name="C:\Users\user\Desktop\projects\amost-finished-NEVER-DELEVE\words-level-project\js" />
       <recent name="C:\Users\user\Desktop\projects\words-level-exercise\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\projects\amost-finished-NEVER-DELEVE\words-level-project\resource" />
     </key>
   </component>
   <component name="RunDashboard">

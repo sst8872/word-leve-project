@@ -355,7 +355,7 @@ var posts = {
 
 var prev = document.querySelector('.previous');
 var next = document.querySelector('.next');
-var printBtn = document.querySelector('.printBtn');
+var printBtn = document.querySelector('.printer');
 var exportContent = document.getElementById('exportContent');
 window.addEventListener('load', init);
 wrapper.addEventListener('scroll', _scrollAlarm.default);
@@ -418,10 +418,7 @@ function loadJSON(sheetLength) {
   });
 }
 
-function loadPage(page, asycData) {
-  printBtn.addEventListener('click', function (e) {
-    makeTwoCopies(e, asycData);
-  });
+function loadPage(page) {
   document.querySelector('.game').innerHTML = '';
   posts.currentPage = page;
   document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1; // if (firstLoad) {
@@ -537,6 +534,9 @@ next.addEventListener('click', function (e) {
     console.log(posts.currentPage);
   }
 });
+printBtn.addEventListener('click', function (e) {
+  makeTwoCopies(e);
+});
 
 function shuffle(arr) {
   var n = arr.length;
@@ -551,14 +551,15 @@ function shuffle(arr) {
   return arr;
 }
 
-function makeTwoCopies(event, wordData) {
-  makeWordContent(event, wordData, "white");
-  makeWordContent(event, wordData, "black");
+function makeTwoCopies(event) {
+  makeWordContent(event, "white");
+  makeWordContent(event, "black");
 }
 
-function makeWordContent(event, wordData, color) {
-  var index = parseInt(event.target.textContent) - 1;
-  var dayWords = wordData[index];
+function makeWordContent(event, color) {
+  var numDay = document.querySelector('.numday').textContent;
+  var index = parseInt(numDay) - 1;
+  var dayWords = posts.results[index];
   exportContent.innerHTML = "<h3\n                                    style=\"text-align: center\"\n                                >\n                                    Day-".concat(index + 1, " TEST;\n                                </h3><br>");
   var tableHTML = "<table style=\"border: 1px solid black; border-collapse: collapse\">\n                        <tr>\n                            <td \n                                style=\"border: 1px solid black;\n                                       font-weight: bold;\n                                       text-align: center;\n                                       color: black \n                                \">\n                                English\n                                </td> \n                            <td \n                                style=\"border: 1px solid black;\n                                       font-weight: bold;\n                                       text-align: center;\n                                       color: black;\n                                \">\n                                Korean\n                                </td> \n                        </tr> \n                    ";
   var tableData = '';
@@ -601,7 +602,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49854" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53522" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
