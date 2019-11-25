@@ -15,11 +15,11 @@ body {
 .btn {
     position: absolute;
     top: 250px;
-    left: -5px;
+    left: -10px;
     background-color: #ddd; /* Blue background */
     border: none; /* Remove borders */
     color: royalblue; /* White text */
-    padding: 10px 12px; /* Some padding */
+    padding: 8px 10px; /* Some padding */
     font-size: 20px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
 }
