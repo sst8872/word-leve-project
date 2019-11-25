@@ -176,22 +176,23 @@ span.numday {
     background-color: #dddddd;
     margin-top: 40px;
     margin-left: 4px;
-}
-
-/*span.numday:hover {*/
-/*    background-color: #3b5998;*/
-/*    color: white;*/
-/*}*/
-
-.printer {
-    width: 32px;
-    margin-top: 10px;
     cursor: pointer;
 }
 
-.printer-icon {
-    width: 100%;
+span.numday:hover {
+    background-color: #3b5998;
+    color: white;
 }
+
+/*.printer {*/
+/*    width: 32px;*/
+/*    margin-top: 10px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.printer-icon {*/
+/*    width: 100%;*/
+/*}*/
 
 .active {
     background-color: #3498db;
