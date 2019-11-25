@@ -173,8 +173,12 @@ span.numday {
     border: 1px solid #444;
     background-color: #dddddd;
     margin-left: 4px;
+    cursor: pointer;
 }
-span.day {
+
+span.numday:hover {
+    background-color: #3b5998;
+    color: white;
 }
 
 .active {

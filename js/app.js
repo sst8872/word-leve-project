@@ -4,6 +4,8 @@ import '../css/navbar.css';
 // import jsonData from './json';
 import getSheetsLength from "./fetchSheetsLength";
 import scrollAlarm from "./scrollAlarm";
+import Export2Doc from "./exportToWords";
+import buildTable from "./makeTable";
 
 let myData = [];
 
@@ -16,6 +18,8 @@ const posts = {
 // let firstLoad = true;
 const prev = document.querySelector('.previous');
 const next = document.querySelector('.next');
+const printBtn = document.querySelector('.printBtn');
+const exportContent = document.getElementById('exportContent');
 
 
 window.addEventListener('load', init);
@@ -75,12 +79,15 @@ function loadJSON(sheetLength) {
     }))
         .then(result => {
             posts.results = result;
-            loadPage(0);
+            loadPage(0, posts.results);
             document.querySelector('.loader').style.display = 'none';
         });
 }
 
-function loadPage(page) {
+function loadPage(page, asycData) {
+    printBtn.addEventListener('click', function (e) {
+        makeTwoCopies(e, asycData);
+    });
     document.querySelector('.game').innerHTML = '';
     posts.currentPage = page;
     document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
@@ -216,38 +223,66 @@ function shuffle (arr) {
     return arr;
 }
 
+function makeTwoCopies(event, wordData) {
+    makeWordContent(event, wordData, "white");
+    makeWordContent(event, wordData, "black");
+}
 
 
-// let myWords = [
-//     { en: "measure", ko: "법안" },
-//     { en: "disease", ko: "질병" },
-//     { en: "vehicle", ko: "차량" },
-//     { en: "warn", ko: "경고하다" },
-//     { en: "persuade", ko: "설득하다" },
-//     { en: "freezing", ko: "동결" },
-//     { en: "wipe", ko: "닦다" },
-//     { en: "severe", ko: "심한" },
-//     { en: "muscle", ko: "근육" },
-//     { en: "crop", ko: "곡물" },
-//     { en: "amazing", ko: "놀라운" },
-//     { en: "agriculture", ko: "농업" },
-//     { en: "long", ko: "갈망하다" },
-//     { en: "leak", ko: "새다" },
-//     { en: "pulse", ko: "맥박" },
-//     { en: "military", ko: "군" },
-//     { en: "approach", ko: "접근" },
-//     { en: "pity", ko: "불쌍한" },
-//     { en: "aware", ko: "알고 있는" },
-//     { en: "guilty", ko: "죄 있는" },
-//     { en: "innocent", ko: "순진한" },
-//     { en: "pot", ko: "냄비" },
-//     { en: "port", ko: "항구" },
-//     { en: "porter", ko: "짐꾼" },
-//     { en: "import", ko: "수입하다" },
-//     { en: "transport", ko: "운송하다" },
-//     { en: "support", ko: "지원하다" },
-//     { en: "portable", ko: "휴대 가능한" },
-//     { en: "potable", ko: "마실 수 있는" },
-//     { en: "leap", ko: "뛰다" },
-//     { en: "reap", ko: "수확하다" },
-// ]
+function makeWordContent(event, wordData, color) {
+    let index  = parseInt(event.target.textContent) - 1;
+    let dayWords = wordData[index];
+    exportContent.innerHTML = `<h3
+                                    style="text-align: center"
+                                >
+                                    Day-${index+1} TEST;
+                                </h3><br>`;
+    let tableHTML = `<table style="border: 1px solid black; border-collapse: collapse">
+                        <tr>
+                            <td 
+                                style="border: 1px solid black;
+                                       font-weight: bold;
+                                       text-align: center;
+                                       color: black 
+                                ">
+                                English
+                                </td> 
+                            <td 
+                                style="border: 1px solid black;
+                                       font-weight: bold;
+                                       text-align: center;
+                                       color: black;
+                                ">
+                                Korean
+                                </td> 
+                        </tr> 
+                    `;
+
+    let tableData = '';
+    for (let i = 0; i < dayWords.length; i++) {
+        let data = `<tr">
+                        <td 
+                            style=" border: 1px solid black;
+                                    color: black;  
+                                   "
+                          >
+                            ${i+1}. ${dayWords[i].en}</td>
+                        <td 
+                            style=" border: 1px solid black;
+                                    color: ${color};  
+                                   "
+                           >
+                            ${dayWords[i].ko}</td>
+                     </tr>
+                     `;
+        tableData += data;
+    }
+    tableHTML += tableData + '</table>';
+
+    exportContent.innerHTML += tableHTML;
+    Export2Doc('exportContent', `day-${index+1}.test`);
+    exportContent.innerHTML = '';
+}
+
+
+
