@@ -38,7 +38,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\user\AppData\Roaming\npm\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -109,7 +109,7 @@
       <workItem from="1574674662709" duration="600000" />
       <workItem from="1574694829207" duration="12909000" />
       <workItem from="1574730459857" duration="350000" />
-      <workItem from="1574808768498" duration="8324000" />
+      <workItem from="1574808768498" duration="23001000" />
     </task>
     <servers />
   </component>
@@ -133,5 +133,15 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="687" y="181" key="SettingsEditor" timestamp="1574827502713">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="687" y="181" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1574827502713" />
+    <state x="827" y="270" width="700" height="530" key="recent.locations.popup" timestamp="1574827648472">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="827" y="270" width="700" height="530" key="recent.locations.popup/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1574827648472" />
   </component>
 </project>

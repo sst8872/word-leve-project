@@ -199,7 +199,40 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/fetchSheetsLength.js":[function(require,module,exports) {
+},{"_css_loader":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"spreadSheet/sheetIDs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var sheetIDs = {
+  'level-1': '1_Z_bti_Wk9g-t2IgxZGYvTpKXaZAqkFt3vDmw-1BU74',
+  // 고1
+  'level-2': '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
+  // 고2
+  'level-3': '1KXnfz5L-QG8e7OhGPV6V3CetYqvz8U4e0zdpA_Q9fTw',
+  // 고3
+  'free': '1z0A-HHj-OXOHNGmVsbHS9HEhREyOE6Dvkxarxak4yyA'
+};
+var _default = sheetIDs;
+exports.default = _default;
+},{}],"spreadSheet/apiURLs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var apiURLs = {
+  'level-1': 'https://script.google.com/macros/s/AKfycbyLoDyJGooiBIZhhC_R4IJDbKgz6yY8aknA5cZdj0LwAuzdSvFx/exec',
+  'level-2': 'https://script.google.com/macros/s/AKfycbzyqLGZTdZSFlGtghA2wQRpPb8yMs88uWBB92iYnAga_OhSJ9c/exec',
+  'level-3': 'https://script.google.com/macros/s/AKfycbygtkEpsZCG-9uclkUYIOULbmyPccoNHgumYQ--9Efsr3APo8Q/exec',
+  'free': 'https://script.google.com/macros/s/AKfycby66icyZOfTUZ5QKmmhjuk73ICBljuMq0s22ShovPC-XLDqk5c/exec'
+};
+var _default = apiURLs;
+exports.default = _default;
+},{}],"js/fetchSheetsLength.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -207,9 +240,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function getSheetsLength(callback) {
+function getSheetsLength(sheetApiUrl, callback) {
   document.querySelector('.loader').style.display = 'block';
-  var appUrl = 'https://script.google.com/macros/s/AKfycbzyqLGZTdZSFlGtghA2wQRpPb8yMs88uWBB92iYnAga_OhSJ9c/exec';
+  var appUrl = sheetApiUrl;
   fetch(appUrl).then(function (res) {
     return res.json();
   }).then(callback);
@@ -327,6 +360,10 @@ require("../css/style.css");
 
 require("../css/navbar.css");
 
+var _sheetIDs = _interopRequireDefault(require("../spreadSheet/sheetIDs"));
+
+var _apiURLs = _interopRequireDefault(require("../spreadSheet/apiURLs"));
+
 var _fetchSheetsLength = _interopRequireDefault(require("./fetchSheetsLength"));
 
 var _scrollAlarm = _interopRequireDefault(require("./scrollAlarm"));
@@ -346,17 +383,14 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var myData = [];
-var sheetIDs = {
-  'level-1': '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
-  'level-2': '1HshUA_vq5dG_ELQIiy8LaFha-rttjmJO3uryhfJ3R8g',
-  'level-3': '1KXnfz5L-QG8e7OhGPV6V3CetYqvz8U4e0zdpA_Q9fTw'
-};
 var posts = {
   postPerpage: 10,
   currentPage: 0,
   results: null,
-  currentSheetID: 'level-1',
-  currentDay: 0
+  currentSheetID: '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
+  currentApiURL: 'https://script.google.com/macros/s/AKfycbzyqLGZTdZSFlGtghA2wQRpPb8yMs88uWBB92iYnAga_OhSJ9c/exec',
+  currentDay: 0,
+  currentActive: 1
 }; // let firstLoad = true;
 
 var prev = document.querySelector('.previous');
@@ -390,7 +424,6 @@ next.addEventListener('click', function (e) {
     document.querySelector('.game').innerHTML = '';
     posts.currentPage++;
     loadPage(posts.currentPage);
-    console.log(posts.currentPage);
   }
 });
 printBtn.addEventListener('click', function (e) {
@@ -398,22 +431,49 @@ printBtn.addEventListener('click', function (e) {
 });
 choices.forEach(function (choice) {
   choice.addEventListener('click', function (e) {
+    console.log(choice);
+    choices.forEach(function (choice) {
+      choice.classList.remove('active');
+    });
+    document.querySelector('.game').innerHTML = '';
+    document.querySelector('.showLevel').textContent = '';
+    document.querySelector('.showLevel').style.display = 'block';
+
     switch (this.dataset.level) {
       case '1':
-        posts.currentSheetID = sheetIDs["level-1"];
+        posts.currentSheetID = _sheetIDs.default["level-1"];
+        posts.currentApiURL = _apiURLs.default['level-1'];
+        posts.currentActive = this.dataset.level;
+        (0, _fetchSheetsLength.default)(posts.currentApiURL, loadJSON);
+        document.querySelector('.showLevel').textContent = '고1';
         break;
 
       case '2':
-        posts.currentSheetID = sheetIDs["level-2"];
+        posts.currentSheetID = _sheetIDs.default["level-2"];
+        posts.currentApiURL = _apiURLs.default['level-2'];
+        posts.currentActive = this.dataset.level;
+        (0, _fetchSheetsLength.default)(posts.currentApiURL, loadJSON);
+        document.querySelector('.showLevel').textContent = '고2';
         break;
 
       case '3':
-        posts.currentSheetID = sheetIDs["level-3"];
-        console.log(posts.currentSheetID);
+        posts.currentSheetID = _sheetIDs.default["level-3"];
+        posts.currentApiURL = _apiURLs.default['level-3'];
+        posts.currentActive = this.dataset.level;
+        (0, _fetchSheetsLength.default)(posts.currentApiURL, loadJSON);
+        document.querySelector('.showLevel').textContent = '고3';
         break;
 
-      default:
-        return sheetIDs["level-1"];
+      case '4':
+        posts.currentSheetID = _sheetIDs.default['free'];
+        posts.currentApiURL = _apiURLs.default['free'];
+        posts.currentActive = this.dataset.level;
+        (0, _fetchSheetsLength.default)(posts.currentApiURL, loadJSON);
+        document.querySelector('.showLevel').innerHTML = '<i class="fa fa-smile-o" aria-hidden="true"></i>';
+    }
+
+    if (this.dataset.level === posts.currentActive) {
+      choice.classList.add('active');
     }
   });
 });
@@ -430,7 +490,7 @@ function init(e) {
   button.setAttribute('class', 'start');
   button.textContent = "Start Study";
   button.addEventListener('click', function () {
-    return (0, _fetchSheetsLength.default)(loadJSON);
+    return (0, _fetchSheetsLength.default)(posts.currentApiURL, loadJSON);
   });
   wrapper.appendChild(button); // Game element
 
@@ -441,10 +501,11 @@ function init(e) {
 
 function loadJSON(sheetLength) {
   var urls = [];
-  var sheetID = '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84';
+  var sheetID = posts.currentSheetID;
 
   for (var sheetNum = 1; sheetNum <= sheetLength; sheetNum++) {
     var jsonURL = "https://spreadsheets.google.com/feeds/list/".concat(sheetID, "/").concat(sheetNum, "/public/values?alt=json");
+    ;
     urls = [].concat(_toConsumableArray(urls), [jsonURL]);
   }
 
@@ -560,10 +621,10 @@ function loadNav() {
   });
   document.querySelector('.closebtn').addEventListener('click', function (e) {
     document.getElementById('mySidenav').style.width = '0';
-  }, false);
-  document.body.addEventListener('mouseleave', function (e) {
-    document.getElementById('mySidenav').style.width = '0';
-  }); // document.querySelector('.shuffleWords').addEventListener('click', function (e) {
+  }, false); // document.body.addEventListener('mouseleave', function (e) {
+  //     document.getElementById('mySidenav').style.width = '0';
+  // })
+  // document.querySelector('.shuffleWords').addEventListener('click', function (e) {
   //     document.querySelector('.game').innerHTML = '';
   //     loadPage(posts.currentPage);
   //     document.getElementById('mySidenav').style.width = '0';
@@ -606,7 +667,7 @@ function makeWordContent(event, color) {
   (0, _exportToWords.default)('exportContent', "day-".concat(index + 1, ".test"));
   exportContent.innerHTML = '';
 }
-},{"../css/loader.css":"css/loader.css","../css/style.css":"css/style.css","../css/navbar.css":"css/navbar.css","./fetchSheetsLength":"js/fetchSheetsLength.js","./scrollAlarm":"js/scrollAlarm.js","./exportToWords":"js/exportToWords.js","./makeTable":"js/makeTable.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"../css/loader.css":"css/loader.css","../css/style.css":"css/style.css","../css/navbar.css":"css/navbar.css","../spreadSheet/sheetIDs":"spreadSheet/sheetIDs.js","../spreadSheet/apiURLs":"spreadSheet/apiURLs.js","./fetchSheetsLength":"js/fetchSheetsLength.js","./scrollAlarm":"js/scrollAlarm.js","./exportToWords":"js/exportToWords.js","./makeTable":"js/makeTable.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -634,7 +695,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49583" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

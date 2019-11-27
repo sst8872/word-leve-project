@@ -1,26 +1,29 @@
 import '../css/loader.css';
 import '../css/style.css';
 import '../css/navbar.css';
-// import jsonData from './json';
+
+// spreadSheet
+import sheetIDs from "../spreadSheet/sheetIDs";
+import apiURLs from "../spreadSheet/apiURLs";
+
+// utility functions
 import getSheetsLength from "./fetchSheetsLength";
 import scrollAlarm from "./scrollAlarm";
 import Export2Doc from "./exportToWords";
 import buildTable from "./makeTable";
 
 let myData = [];
-let sheetIDs = {
-    'level-1': '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
-    'level-2': '1HshUA_vq5dG_ELQIiy8LaFha-rttjmJO3uryhfJ3R8g',
-    'level-3': '1KXnfz5L-QG8e7OhGPV6V3CetYqvz8U4e0zdpA_Q9fTw'
-};
 
 const posts = {
     postPerpage: 10,
     currentPage: 0,
     results: null,
-    currentSheetID: 'level-1',
-    currentDay: 0
+    currentSheetID: '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
+    currentApiURL: 'https://script.google.com/macros/s/AKfycbzyqLGZTdZSFlGtghA2wQRpPb8yMs88uWBB92iYnAga_OhSJ9c/exec',
+    currentDay: 0,
+    currentActive: 1
 };
+
 // let firstLoad = true;
 const prev = document.querySelector('.previous');
 const next = document.querySelector('.next');
@@ -56,7 +59,6 @@ next.addEventListener('click', function (e) {
         document.querySelector('.game').innerHTML = '';
         posts.currentPage++;
         loadPage(posts.currentPage);
-        console.log(posts.currentPage);
     }
 });
 
@@ -66,19 +68,45 @@ printBtn.addEventListener('click', function (e) {
 
 choices.forEach(choice => {
     choice.addEventListener('click', function (e) {
+        console.log(choice);
+            choices.forEach(choice => {
+            choice.classList.remove('active');
+        });
+        document.querySelector('.game').innerHTML = '';
+        document.querySelector('.showLevel').textContent = '';
+        document.querySelector('.showLevel').style.display = 'block';
         switch (this.dataset.level) {
             case '1':
                 posts.currentSheetID = sheetIDs["level-1"];
+                posts.currentApiURL = apiURLs['level-1'];
+                posts.currentActive = this.dataset.level;
+                getSheetsLength(posts.currentApiURL, loadJSON);
+                document.querySelector('.showLevel').textContent = '고1';
+
                 break;
             case '2':
                 posts.currentSheetID = sheetIDs["level-2"]
+                posts.currentApiURL = apiURLs['level-2'];
+                posts.currentActive = this.dataset.level;
+                getSheetsLength(posts.currentApiURL, loadJSON);
+                document.querySelector('.showLevel').textContent = '고2';
                 break;
             case '3':
                 posts.currentSheetID = sheetIDs["level-3"]
-                console.log(posts.currentSheetID);
+                posts.currentApiURL = apiURLs['level-3'];
+                posts.currentActive = this.dataset.level;
+                getSheetsLength(posts.currentApiURL, loadJSON);
+                document.querySelector('.showLevel').textContent = '고3';
                 break;
-            default:
-                return sheetIDs["level-1"];
+            case '4':
+                posts.currentSheetID = sheetIDs['free']
+                posts.currentApiURL = apiURLs['free'];
+                posts.currentActive = this.dataset.level;
+                getSheetsLength(posts.currentApiURL, loadJSON);
+                document.querySelector('.showLevel').innerHTML = '<i class="fa fa-smile-o" aria-hidden="true"></i>';
+        }
+        if (this.dataset.level === posts.currentActive) {
+            choice.classList.add('active');
         }
     });
 });
@@ -96,7 +124,7 @@ function init(e) {
     button.type = button;
     button.setAttribute('class', 'start');
     button.textContent = "Start Study";
-    button.addEventListener('click', () => getSheetsLength(loadJSON));
+    button.addEventListener('click', () => getSheetsLength(posts.currentApiURL, loadJSON));
     wrapper.appendChild(button);
 
 
@@ -108,10 +136,10 @@ function init(e) {
 
 function loadJSON(sheetLength) {
     let urls = [];
-    var sheetID = '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84';
+    var sheetID = posts.currentSheetID;
 
     for (let sheetNum = 1; sheetNum <= sheetLength; sheetNum++) {
-        let jsonURL = `https://spreadsheets.google.com/feeds/list/${sheetID}/${sheetNum}/public/values?alt=json`;
+        let jsonURL = `https://spreadsheets.google.com/feeds/list/${sheetID}/${sheetNum}/public/values?alt=json`;;
         urls = [...urls, jsonURL];
     }
 
@@ -233,9 +261,9 @@ function loadNav() {
             document.getElementById('mySidenav').style.width = '0';
      }, false);
 
-     document.body.addEventListener('mouseleave', function (e) {
-         document.getElementById('mySidenav').style.width = '0';
-     })
+     // document.body.addEventListener('mouseleave', function (e) {
+     //     document.getElementById('mySidenav').style.width = '0';
+     // })
 
     // document.querySelector('.shuffleWords').addEventListener('click', function (e) {
     //     document.querySelector('.game').innerHTML = '';

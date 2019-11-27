@@ -101,8 +101,18 @@ nav.hidden {
         bottom: 20px;
     }
 }
+
+.sidenav .level-box {
+    margin-left: 15px;
+}
+
+.sidenav .curday {
+    cursor: default;
+}
+
+
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -113,6 +123,11 @@ nav.hidden {
 .sidenav a:hover {
     color: #f1f1f1;
 }
+
+.sidenav .curday:hover {
+    color: #818181;
+}
+
 
 .sidenav .closebtn {
     position: absolute;
@@ -198,8 +213,19 @@ span.numday {
     width: 100%;
 }
 
+@media screen and (max-width: 640px) {
+    .printer-icon {
+        display: none;
+    }
+}
+
+.level-box > a.active {
+    color: white;
+}
+
 .active {
     background-color: #3498db;
-    color: red;
+    color: white;
 }
+
 
