@@ -1,12 +1,12 @@
 function scrollAlarm(e) {
     var res =  this.scrollHeight - this.scrollTop === this.clientHeight;
-    if (!this.scrollTop) {
-        document.querySelector('.scroll-top').style.visibility = 'visible';
+    const scrollMessage = document.querySelector('.scroll-top');
+    if (this.scrollTop == 0) {
+        scrollMessage.innerHTML = '<i class="fa fa-arrow-down" aria-hidden="true"></i>';
+    } else if (this.scrollTop > 0 && this.scrollTop < this.clientHeight) {
+        scrollMessage.textContent = '';
     } else if (res) {
-        document.querySelector('.scroll-bottom').style.visibility = 'visible';
-    } else {
-        document.querySelector('.scroll-top').style.visibility = 'hidden';
-        document.querySelector('.scroll-bottom').style.visibility = 'hidden';
+        scrollMessage.innerHTML = '<i class="fa fa-arrow-up" aria-hidden="true"></i>';
     }
 }
 
