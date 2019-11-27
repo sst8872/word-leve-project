@@ -8,11 +8,17 @@ import Export2Doc from "./exportToWords";
 import buildTable from "./makeTable";
 
 let myData = [];
+let sheetIDs = {
+    'level-1': '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
+    'level-2': '1HshUA_vq5dG_ELQIiy8LaFha-rttjmJO3uryhfJ3R8g',
+    'level-3': '1KXnfz5L-QG8e7OhGPV6V3CetYqvz8U4e0zdpA_Q9fTw'
+};
 
 const posts = {
     postPerpage: 10,
     currentPage: 0,
     results: null,
+    currentSheetID: 'level-1',
     currentDay: 0
 };
 // let firstLoad = true;
@@ -20,10 +26,62 @@ const prev = document.querySelector('.previous');
 const next = document.querySelector('.next');
 const printBtn = document.querySelector('.printer');
 const exportContent = document.getElementById('exportContent');
+const choices = document.querySelectorAll('.choice');
 
-
+// Event Listeners
 window.addEventListener('load', init);
 wrapper.addEventListener('scroll', scrollAlarm);
+document.querySelector('.shuffleWords').addEventListener('click', function (e) {
+    document.querySelector('.game').innerHTML = '';
+    loadPage(posts.currentPage);
+    document.getElementById('mySidenav').style.width = '0';
+});
+
+prev.addEventListener('click', function (e) {
+    if (posts.currentPage <= 0) {
+        alert('Hey, No Negative Pages!');
+        return;
+    } else {
+        document.querySelector('.game').innerHTML = '';
+        posts.currentPage--;
+        loadPage(posts.currentPage);
+    }
+});
+
+next.addEventListener('click', function (e) {
+    if (posts.currentPage + 1 >= posts.results.length) {
+        alert('No More Pages!');
+        return;
+    } else {
+        document.querySelector('.game').innerHTML = '';
+        posts.currentPage++;
+        loadPage(posts.currentPage);
+        console.log(posts.currentPage);
+    }
+});
+
+printBtn.addEventListener('click', function (e) {
+    makeTwoCopies(e);
+});
+
+choices.forEach(choice => {
+    choice.addEventListener('click', function (e) {
+        switch (this.dataset.level) {
+            case '1':
+                posts.currentSheetID = sheetIDs["level-1"];
+                break;
+            case '2':
+                posts.currentSheetID = sheetIDs["level-2"]
+                break;
+            case '3':
+                posts.currentSheetID = sheetIDs["level-3"]
+                console.log(posts.currentSheetID);
+                break;
+            default:
+                return sheetIDs["level-1"];
+        }
+    });
+});
 
 
 function init(e) {
@@ -162,9 +220,10 @@ function loadNumbers() {
     });
 }
 
+
 function loadNav() {
     document.querySelector('.navbar').classList.remove('hidden');
-     document.querySelector('.day').innerHTML = `<span class="day">DAY-${parseInt(posts.currentPage) + 1}</spanclass> in ${posts.results.length}`;
+     document.querySelector('.curday').innerHTML = `Day-${parseInt(posts.currentPage) + 1} in ${posts.results.length}`;
      document.querySelector('.openbtn').addEventListener('click', function (e) {
             document.getElementById('mySidenav').style.width = '300px';
      });
@@ -178,39 +237,13 @@ function loadNav() {
          document.getElementById('mySidenav').style.width = '0';
      })
 
-    document.querySelector('.shuffleWords').addEventListener('click', function (e) {
-        document.querySelector('.game').innerHTML = '';
-        loadPage(posts.currentPage);
-        document.getElementById('mySidenav').style.width = '0';
-    });
+    // document.querySelector('.shuffleWords').addEventListener('click', function (e) {
+    //     document.querySelector('.game').innerHTML = '';
+    //     loadPage(posts.currentPage);
+    //     document.getElementById('mySidenav').style.width = '0';
+    // });
 }
 
-prev.addEventListener('click', function (e) {
-    if (posts.currentPage <= 0) {
-        alert('Hey, No Negative Pages!');
-        return;
-    } else {
-        document.querySelector('.game').innerHTML = '';
-        posts.currentPage--;
-        loadPage(posts.currentPage);
-    }
-});
-
-next.addEventListener('click', function (e) {
-    if (posts.currentPage + 1 >= posts.results.length) {
-        alert('No More Pages!');
-        return;
-    } else {
-        document.querySelector('.game').innerHTML = '';
-        posts.currentPage++;
-        loadPage(posts.currentPage);
-        console.log(posts.currentPage);
-    }
-});
-
-printBtn.addEventListener('click', function (e) {
-    makeTwoCopies(e);
-});
 
 function shuffle (arr) {
     var n = arr.length;

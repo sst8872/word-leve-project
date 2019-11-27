@@ -21,6 +21,7 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -51,6 +52,13 @@ body {
 .btn:hover {
     background-color: #3b5998;
     color: white;
+}
+
+.level-box {
+    display: flex;
+}
+.level-box > .day {
+    cursor: pointer;
 }
 
 #wrapper {
@@ -260,6 +268,7 @@ body {
 
 
 
+
 nav .indicator {
     position: fixed;
     left: 30px;
@@ -326,6 +335,10 @@ nav.hidden {
     overflow-y: hidden;
     transition: 0.5s;
     padding-top: 60px;
+}
+
+.sidenav .curday  {
+    margin-left: calc(50% - 110px);
 }
 
 @media screen and (min-width: 1300px) {
@@ -412,6 +425,7 @@ nav.hidden {
     cursor: pointer;
 }
 .number:hover {
+    cursor: pointer;
     color: red;
     background-color: #3498db;
 }
@@ -460,3 +474,6 @@ span.numday {
     color: red;
 }
 
+
+
+/*# sourceMappingURL=/app.c3f9f951.css.map */

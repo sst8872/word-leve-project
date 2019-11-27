@@ -66,6 +66,10 @@ nav.hidden {
     padding-top: 60px;
 }
 
+.sidenav .curday  {
+    margin-left: calc(50% - 110px);
+}
+
 @media screen and (min-width: 1300px) {
     .sidenav {
         left: calc(30% - 200px);
@@ -150,6 +154,7 @@ nav.hidden {
     cursor: pointer;
 }
 .number:hover {
+    cursor: pointer;
     color: red;
     background-color: #3498db;
 }

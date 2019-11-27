@@ -346,10 +346,16 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var myData = [];
+var sheetIDs = {
+  'level-1': '1mgbYLvqlZ9FIRFbiIhg6C4SQZtHihCOME7f5m49Ze84',
+  'level-2': '1HshUA_vq5dG_ELQIiy8LaFha-rttjmJO3uryhfJ3R8g',
+  'level-3': '1KXnfz5L-QG8e7OhGPV6V3CetYqvz8U4e0zdpA_Q9fTw'
+};
 var posts = {
   postPerpage: 10,
   currentPage: 0,
   results: null,
+  currentSheetID: 'level-1',
   currentDay: 0
 }; // let firstLoad = true;
 
@@ -357,8 +363,60 @@ var prev = document.querySelector('.previous');
 var next = document.querySelector('.next');
 var printBtn = document.querySelector('.printer');
 var exportContent = document.getElementById('exportContent');
+var choices = document.querySelectorAll('.choice'); // Event Listeners
+
 window.addEventListener('load', init);
 wrapper.addEventListener('scroll', _scrollAlarm.default);
+document.querySelector('.shuffleWords').addEventListener('click', function (e) {
+  document.querySelector('.game').innerHTML = '';
+  loadPage(posts.currentPage);
+  document.getElementById('mySidenav').style.width = '0';
+});
+prev.addEventListener('click', function (e) {
+  if (posts.currentPage <= 0) {
+    alert('Hey, No Negative Pages!');
+    return;
+  } else {
+    document.querySelector('.game').innerHTML = '';
+    posts.currentPage--;
+    loadPage(posts.currentPage);
+  }
+});
+next.addEventListener('click', function (e) {
+  if (posts.currentPage + 1 >= posts.results.length) {
+    alert('No More Pages!');
+    return;
+  } else {
+    document.querySelector('.game').innerHTML = '';
+    posts.currentPage++;
+    loadPage(posts.currentPage);
+    console.log(posts.currentPage);
+  }
+});
+printBtn.addEventListener('click', function (e) {
+  makeTwoCopies(e);
+});
+choices.forEach(function (choice) {
+  choice.addEventListener('click', function (e) {
+    switch (this.dataset.level) {
+      case '1':
+        posts.currentSheetID = sheetIDs["level-1"];
+        break;
+
+      case '2':
+        posts.currentSheetID = sheetIDs["level-2"];
+        break;
+
+      case '3':
+        posts.currentSheetID = sheetIDs["level-3"];
+        console.log(posts.currentSheetID);
+        break;
+
+      default:
+        return sheetIDs["level-1"];
+    }
+  });
+});
 
 function init(e) {
   // Grid wrapper displaying message
@@ -496,7 +554,7 @@ function loadNumbers() {
 
 function loadNav() {
   document.querySelector('.navbar').classList.remove('hidden');
-  document.querySelector('.day').innerHTML = "<span class=\"day\">DAY-".concat(parseInt(posts.currentPage) + 1, "</spanclass> in ").concat(posts.results.length);
+  document.querySelector('.curday').innerHTML = "Day-".concat(parseInt(posts.currentPage) + 1, " in ").concat(posts.results.length);
   document.querySelector('.openbtn').addEventListener('click', function (e) {
     document.getElementById('mySidenav').style.width = '300px';
   });
@@ -505,38 +563,12 @@ function loadNav() {
   }, false);
   document.body.addEventListener('mouseleave', function (e) {
     document.getElementById('mySidenav').style.width = '0';
-  });
-  document.querySelector('.shuffleWords').addEventListener('click', function (e) {
-    document.querySelector('.game').innerHTML = '';
-    loadPage(posts.currentPage);
-    document.getElementById('mySidenav').style.width = '0';
-  });
+  }); // document.querySelector('.shuffleWords').addEventListener('click', function (e) {
+  //     document.querySelector('.game').innerHTML = '';
+  //     loadPage(posts.currentPage);
+  //     document.getElementById('mySidenav').style.width = '0';
+  // });
 }
-
-prev.addEventListener('click', function (e) {
-  if (posts.currentPage <= 0) {
-    alert('Hey, No Negative Pages!');
-    return;
-  } else {
-    document.querySelector('.game').innerHTML = '';
-    posts.currentPage--;
-    loadPage(posts.currentPage);
-  }
-});
-next.addEventListener('click', function (e) {
-  if (posts.currentPage + 1 >= posts.results.length) {
-    alert('No More Pages!');
-    return;
-  } else {
-    document.querySelector('.game').innerHTML = '';
-    posts.currentPage++;
-    loadPage(posts.currentPage);
-    console.log(posts.currentPage);
-  }
-});
-printBtn.addEventListener('click', function (e) {
-  makeTwoCopies(e);
-});
 
 function shuffle(arr) {
   var n = arr.length;
@@ -602,7 +634,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53522" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64006" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -779,3 +811,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/app.js"], null)
+//# sourceMappingURL=/app.c3f9f951.js.map
