@@ -30,6 +30,12 @@ span.openbtn:hover {
     color: #444;
 }
 
+.shuffleWords > .fa-random:hover {
+    color: #3b5998;
+}
+
+
+
 @media screen and (min-width: 880px) {
     nav .indicator {
         margin-left: calc(50% - 450px);

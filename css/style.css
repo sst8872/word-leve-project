@@ -168,18 +168,7 @@ body {
     display: none;
 }
 
-.index > .shuffleWords {
-}
-.index > .shuffleWords:hover {
-    cursor: pointer;
-}
-
-
-
-
 /* tool tips */
-.tooltip-message {
-}
 
 .tooltip-output {
     z-index: 100;
