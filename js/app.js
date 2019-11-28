@@ -42,11 +42,12 @@ printBtn.addEventListener('click', function (e) {
 
 choices.forEach(choice => {
     choice.addEventListener('click', function (e) {
-        console.log(choice);
             choices.forEach(choice => {
             choice.classList.remove('active');
         });
         document.querySelector('.game').innerHTML = '';
+        document.querySelector('.open-box').style.display = 'none';
+
         // document.querySelector('.showLevel').textContent = '';
         // document.querySelector('.showLevel').style.display = 'block';
         switch (this.dataset.level) {
@@ -147,6 +148,7 @@ function loadJSON(sheetLength) {
 
 function loadPage(page) {
     document.querySelector('.game').innerHTML = '';
+    document.querySelector('.open-box').style.display = 'block';
     posts.currentPage = page;
     document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
     // if (firstLoad) {
