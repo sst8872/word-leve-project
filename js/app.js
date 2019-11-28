@@ -8,7 +8,6 @@ import apiURLs from "../spreadSheet/apiURLs";
 
 // utility functions
 import getSheetsLength from "./fetchSheetsLength";
-import scrollAlarm from "./scrollAlarm";
 import Export2Doc from "./exportToWords";
 import buildTable from "./makeTable";
 
@@ -25,41 +24,16 @@ const posts = {
 };
 
 // let firstLoad = true;
-const prev = document.querySelector('.previous');
-const next = document.querySelector('.next');
 const printBtn = document.querySelector('.printer');
 const exportContent = document.getElementById('exportContent');
 const choices = document.querySelectorAll('.choice');
 
 // Event Listeners
 window.addEventListener('load', init);
-wrapper.addEventListener('scroll', scrollAlarm);
 document.querySelector('.shuffleWords').addEventListener('click', function (e) {
     document.querySelector('.game').innerHTML = '';
     loadPage(posts.currentPage);
     document.getElementById('mySidenav').style.width = '0';
-});
-
-prev.addEventListener('click', function (e) {
-    if (posts.currentPage <= 0) {
-        alert('Hey, No Negative Pages!');
-        return;
-    } else {
-        document.querySelector('.game').innerHTML = '';
-        posts.currentPage--;
-        loadPage(posts.currentPage);
-    }
-});
-
-next.addEventListener('click', function (e) {
-    if (posts.currentPage + 1 >= posts.results.length) {
-        alert('No More Pages!');
-        return;
-    } else {
-        document.querySelector('.game').innerHTML = '';
-        posts.currentPage++;
-        loadPage(posts.currentPage);
-    }
 });
 
 printBtn.addEventListener('click', function (e) {
@@ -73,15 +47,15 @@ choices.forEach(choice => {
             choice.classList.remove('active');
         });
         document.querySelector('.game').innerHTML = '';
-        document.querySelector('.showLevel').textContent = '';
-        document.querySelector('.showLevel').style.display = 'block';
+        // document.querySelector('.showLevel').textContent = '';
+        // document.querySelector('.showLevel').style.display = 'block';
         switch (this.dataset.level) {
             case '1':
                 posts.currentSheetID = sheetIDs["level-1"];
                 posts.currentApiURL = apiURLs['level-1'];
                 posts.currentActive = this.dataset.level;
                 getSheetsLength(posts.currentApiURL, loadJSON);
-                document.querySelector('.showLevel').textContent = '고1';
+                // document.querySelector('.showLevel').textContent = '고1';
 
                 break;
             case '2':
@@ -89,21 +63,21 @@ choices.forEach(choice => {
                 posts.currentApiURL = apiURLs['level-2'];
                 posts.currentActive = this.dataset.level;
                 getSheetsLength(posts.currentApiURL, loadJSON);
-                document.querySelector('.showLevel').textContent = '고2';
+                // document.querySelector('.showLevel').textContent = '고2';
                 break;
             case '3':
                 posts.currentSheetID = sheetIDs["level-3"]
                 posts.currentApiURL = apiURLs['level-3'];
                 posts.currentActive = this.dataset.level;
                 getSheetsLength(posts.currentApiURL, loadJSON);
-                document.querySelector('.showLevel').textContent = '고3';
+                // document.querySelector('.showLevel').textContent = '고3';
                 break;
             case '4':
                 posts.currentSheetID = sheetIDs['free']
                 posts.currentApiURL = apiURLs['free'];
                 posts.currentActive = this.dataset.level;
                 getSheetsLength(posts.currentApiURL, loadJSON);
-                document.querySelector('.showLevel').innerHTML = '<i class="fa fa-smile-o" aria-hidden="true"></i>';
+                // document.querySelector('.showLevel').innerHTML = '<i class="fa fa-smile-o" aria-hidden="true"></i>';
         }
         if (this.dataset.level === posts.currentActive) {
             choice.classList.add('active');
@@ -255,7 +229,6 @@ function loadNav() {
      document.querySelector('.openbtn').addEventListener('click', function (e) {
             document.getElementById('mySidenav').style.width = '300px';
      });
-
 
     document.querySelector('.closebtn').addEventListener('click', function (e) {
             document.getElementById('mySidenav').style.width = '0';

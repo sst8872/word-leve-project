@@ -1,52 +1,16 @@
 nav .indicator {
     position: fixed;
-    width: 1000px;
-    left: 30px;
-}
-.open-shuffle,
-.home-numday {
-    position: absolute;
+    right: 20px;
 }
 
-@media screen and (max-width: 420px) {
-    .open-shuffle {
-        left: 312px;
-    }
-    .home-numday {
-        left: 2px;
+@media screen and (min-width: 890px) {
+    nav .indicator {
+        right: calc(50% - 410px);
     }
 }
 
-@media screen and (max-width: 380px) {
-    .open-shuffle {
-        left: 276px;
-        top: 0px;
-    }
-    .home-numday {
-        left: -1px;
-        top: 0px;
-    }
-}
-
-@media screen and (max-width: 370px) {
-    .open-shuffle {
-        left: 261px;
-        top: -18px;
-    }
-    .home-numday {
-        top: -18px;
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .open-shuffle {
-        left: 225px;
-        top: 0px;
-    }
-    .home-numday {
-        left: -4px;
-        top: 0px;
-    }
+.open-shuffle {
+    margin-left: 3px;
 }
 
 span.openbtn {
@@ -71,28 +35,6 @@ span.openbtn:hover {
         margin-left: calc(50% - 450px);
     }
 }
-
-
-.scroll > .scroll-top {
-    position: absolute;
-    top: 250px;
-    display: inline-block;
-    width: 30px;
-    color: #3b5998;
-    font-size: 1.5em;
-    border: none;
-    height: 20px;
-    padding: 5px;
-    text-align: center;
-}
-
-
-.scroll > .scroll-top {
-    right: 10px;
-    top: calc(50% - 1em);
-    visibility: visible;
-}
-
 
 nav.hidden {
     width: 200px;
@@ -210,6 +152,7 @@ nav.hidden {
 
 span.numday {
     display: inline-block;
+    margin-top: 30px;
     padding: 2px 4px 2px 4px;
     width: 25px;
     height: 25px;
@@ -229,15 +172,20 @@ span.numday {
 
 .printer {
     width: 32px;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-left: 4px;
     cursor: pointer;
 }
+.printer:hover {
+    transform: scale(0.9);
+}
+
 
 .printer-icon {
     width: 100%;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 600px) {
     .printer-icon {
         display: none;
     }

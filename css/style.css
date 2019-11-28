@@ -11,19 +11,22 @@ body {
     overscroll-behavior: contain;
 }
 
-/* Style buttons */
+/* Style home buttons */
+
 .btn {
     border: none; /* Remove borders */
     color: #444; /* White text */
-    padding: 2px 4px; /* Some padding */
+    padding: 2px 1px; /* Some padding */
     font-size: 40px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
 }
-
 .btn:hover {
     color: #3b5998;
 }
-
+.home {
+    margin-top: 30px;
+    margin-right: 4px;
+}
 /* Darker background on mouse-over */
 
 .level-box {
@@ -35,16 +38,32 @@ body {
 
 #wrapper {
     max-width: 768px;
-    height: 500px;
     margin: 20px auto 0;
+    height: 100%;
     padding: 20px;
     overflow-y: auto;
+}
+
+@media screen and (max-width: 800px) {
+    #wrapper {
+        height: 700px;
+    }
 }
 
 @media screen and (max-width: 330px) {
     #wrapper {
         height: 400px;
     }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+#wrapper {
+    -ms-overflow-style: none;
 }
 
 /* game grid */
@@ -129,20 +148,7 @@ body {
     right: 20px;
 }
 
-@media screen and (min-width: 880px) {
-    .index .previous {
-        margin-left: calc(50% - 400px);
-    }
-    .index .next {
-        margin-right: calc(50% - 370px);
-    }
-}
 
-/*@media (max-width: 796px) {*/
-/*    .index {*/
-/*        position: fixed;*/
-/*    }*/
-/*}*/
 
 .index > a {
     font-size: 33px;
@@ -155,15 +161,6 @@ body {
     cursor: pointer;
 }
 
-/*.index > a:hover {*/
-/*    background-color: #3b5998;*/
-/*    color: white;*/
-/*}*/
-
-.index .next,
-.index .previous {
-    padding-bottom: 6px;
-}
 
 .index.hidden {
     display: none;
@@ -175,26 +172,8 @@ body {
     cursor: pointer;
 }
 
-@media screen and (max-width: 676px) {
-    .index .next,
-    .index .previous {
-        display: none;
-    }
-}
-#wrapper {
-    background-color: #eee;
-    overflow-y: scroll; /* Add the ability to scroll */
-}
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-#wrapper::-webkit-scrollbar {
-    display: none;
-}
 
-/* Hide scrollbar for IE and Edge */
-#wrapper {
-    -ms-overflow-style: none;
-}
 
 /* tool tips */
 .tooltip-message {
