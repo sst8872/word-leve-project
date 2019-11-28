@@ -148,7 +148,7 @@ function loadJSON(sheetLength) {
 
 function loadPage(page) {
     document.querySelector('.game').innerHTML = '';
-    document.querySelector('.open-box').style.display = 'block';
+    document.querySelector('.open-box').style.display = 'block'
     posts.currentPage = page;
     document.querySelector('.numday').innerHTML = parseInt(posts.currentPage) + 1;
     // if (firstLoad) {

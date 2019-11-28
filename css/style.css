@@ -104,14 +104,16 @@ body {
 .start {
     position: fixed;
     top: 100px;
-    background-color: #008CBA; /* blue */
+    background-color: #3b5998; /* blue */
     border: none;
     color: white;
     padding: 15px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1.5em;
+    font-weight: lighter;
+    letter-spacing: 1.2px;
 }
 .start:hover {
     background-color: #4CAF50; /* green */
